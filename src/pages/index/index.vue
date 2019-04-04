@@ -1,126 +1,57 @@
 <template>
-  <div @click="clickHandle">
-
-    <div class="userinfo" @click="bindViewTap">
-      <img class="userinfo-avatar" v-if="userInfo.avatarUrl" :src="userInfo.avatarUrl" background-size="cover" />
-      <img class="userinfo-avatar" src="/static/images/user.png" background-size="cover" />
-
-      <div class="userinfo-nickname">
-        <card :text="userInfo.nickName"></card>
-      </div>
-    </div>
-
-    <div class="usermotto">
-      <div class="user-motto">
-        <card :text="motto"></card>
-      </div>
-    </div>
-
-    <form class="form-container">
-      <input type="text" class="form-control" :value="motto" placeholder="v-model" />
-      <input type="text" class="form-control" v-model="motto" placeholder="v-model" />
-      <input type="text" class="form-control" v-model.lazy="motto" placeholder="v-model.lazy" />
-    </form>
-
-    <a href="/pages/counter/main" class="counter">去往Vuex示例页面</a>
-
-    <div class="all">
-        <div class="left">
-        </div>
-        <div class="right">
-        </div>
-    </div>
+  <div>
+      <swiper v-if="imgUrls.length > 0" autoplay="ture"  class="banner-img">
+      <block v-for="(item, index) in imgUrls" :key="index" >
+        <swiper-item >
+          <image :src="item"  class="banner-img"></image>
+        </swiper-item>
+      </block>
+    </swiper>
+    <ShowCard  title="猜你喜欢" :imgUrls="showUrls" :changImg="changImg"></ShowCard>
   </div>
 </template>
 
 <script>
-import card from '@/components/card'
+
+import ShowCard from '@/components/index/ShowCard'
 
 export default {
+  components: {
+    ShowCard
+  },
+
   data () {
     return {
-      motto: 'Hello miniprograme',
-      userInfo: {
-        nickName: 'mpvue',
-        avatarUrl: 'http://mpvue.com/assets/logo.png'
-      }
+      imgUrls: [
+        'https://rs.sfacg.com/web/m/images/homePush/2019/04/47e25400-07b4-43f2-b82b-159836769b9f.jpg',
+        'https://rs.sfacg.com/web/m/images/homePush/2019/03/02238dd4-f610-4937-b45d-7e90c88da9fc.jpg',
+        'https://rs.sfacg.com/web/m/images/homePush/2019/03/7276b369-b58e-4653-bb0d-9a0f58e0cf46.jpg',
+        'https://rs.sfacg.com/web/m/images/homePush/2019/03/b3ee35af-ccbe-4dbc-bedd-3ada46b8dda6.jpg',
+        'https://rs.sfacg.com/web/m/images/homePush/2019/03/fee6210d-5d36-4163-84d6-984d350a4eb2.jpg',
+        'https://rs.sfacg.com/web/m/images/homePush/2019/03/fee6210d-5d36-4163-84d6-984d350a4eb2.jpg'
+      ],
+      showUrls: [
+        'http://rs.sfacg.com/web/novel/images/NovelCover/Big/2018/06/7f999278-0ce3-46ea-8b34-8ebbcbb075ac.jpg',
+        'http://rs.sfacg.com/web/novel/images/NovelCover/Big/2019/02/4dfd20b8-907a-424a-a255-481a6e9ed5a0.jpg',
+        'http://rs.sfacg.com/web/novel/images/NovelCover/Big/2019/01/d15e7839-9faf-4292-9879-1cbaa552778b.jpg',
+        'http://rs.sfacg.com/web/novel/images/NovelCover/Big/2017/01/58dfbe8c-2beb-4597-9454-ab91916688b5.jpg',
+        'http://rs.sfacg.com/web/novel/images/NovelCover/Big/2019/02/29bd3852-d58c-45b1-9468-325f7a4ef0e1.jpg',
+        'http://rs.sfacg.com/web/novel/images/NovelCover/Big/2019/03/175294e1-dfcf-40cc-a4b1-126731e01153.jpg'
+      ]
     }
   },
-
-  components: {
-    card
-  },
-
   methods: {
-    bindViewTap () {
-      const url = '../logs/main'
-      if (mpvuePlatform === 'wx') {
-        mpvue.switchTab({ url })
-      } else {
-        mpvue.navigateTo({ url })
-      }
-    },
-    clickHandle (ev) {
-      console.log('clickHandle:', ev)
-      // throw {message: 'custom test'}
+    changImg () {
+      console.log(1)
     }
-  },
-
-  created () {
-    // let app = getApp()
   }
 }
 </script>
 
-<style scoped>
-.userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+<style>
+.banner-img {
+  width: 750rpx;
+  height:300rpx;
 }
 
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
-}
-
-.userinfo-nickname {
-  color: #aaa;
-}
-
-.usermotto {
-  margin-top: 150px;
-}
-
-.form-control {
-  display: block;
-  padding: 0 12px;
-  margin-bottom: 5px;
-  border: 1px solid #ccc;
-}
-.all{
-  width:7.5rem;
-  height:1rem;
-  background-color:blue;
-}
-.all:after{
-  display:block;
-  content:'';
-  clear:both;
-}
-.left{
-  float:left;
-  width:3rem;
-  height:1rem;
-  background-color:red;
-}
-
-.right{
-  float:left;
-  width:4.5rem;
-  height:1rem;
-  background-color:green;
-}
 </style>
