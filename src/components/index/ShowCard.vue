@@ -7,7 +7,7 @@
     <ul class="card-ul">
       <li v-for="(item, index) in imgUrls" :key="index" class="card-img">
           <image :src="item" class="card-img" ></image>
-          <span>名字</span>
+          <p class="card-name">{{showName[index]}}</p>
       </li>
     </ul>
   </div>
@@ -15,7 +15,7 @@
 
 <script>
   export default{
-    props: ['title', 'imgUrls', 'changImg']
+    props: ['title', 'imgUrls', 'changImg', 'showName']
   }
 </script>
 
@@ -54,11 +54,15 @@
 
 }
 .card-img{
+    margin-top: 20rpx;
     width: 220rpx;
-    height: 360rpx;
 }
 .card-img image{
     width: 220rpx;
     height:300rpx;
+}
+.card-name{
+  font-size: 16px;
+  text-align: center;
 }
 </style>
