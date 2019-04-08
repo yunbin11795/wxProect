@@ -52,6 +52,9 @@ export default {
     changImg () {
       console.log(1)
     }
+  },
+  created(){
+      this.$store.dispatch("getChannels")
   }
 }
 </script>
