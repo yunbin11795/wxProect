@@ -19,11 +19,15 @@ const actions = {
   getChannels({commit}){
     let query={query: "{hello}",variables: null};
 
-    axios.post("http://47.107.247.199:3000/graphql",query)
-      .then((res)=>{
-          console.log(res);
-          commit("GETCHANNELS",res);
-      })
+    wx.request({
+      url:"http://47.107.247.199:3000/graphql",
+      data:query,
+      method:"POST",
+      success: function(res) {
+        console.log(res);
+        commit("GETCHANNELS",res);
+      }
+    })
   }
 };
 
