@@ -17,10 +17,10 @@ const mutations = {
 
 const actions = {
   getChannels({commit}){
-    let query={query: "{hello}",variables: null};
+    let query={query: "{Book}",variables: null};
 
     wx.request({
-      url:"http://47.107.247.199:3000/graphql",
+      url:"https://www.wuxingzhihuan.club:3000/graphql",
       data:query,
       method:"POST",
       success: function(res) {
